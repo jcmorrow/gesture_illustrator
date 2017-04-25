@@ -66,9 +66,8 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -77,8 +76,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9531,141 +9529,7 @@ root._=_;}}).call(undefined);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)(module)))
 
 /***/ }),
-
-/***/ 3:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _lodash = __webpack_require__(1);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _tinycolor = __webpack_require__(72);
-
-var _tinycolor2 = _interopRequireDefault(_tinycolor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// center that shit
-var center = (0, _lodash2.default)(points).reduce(function (average, value, index, collection) {
-  return { x: average.x + value.x / collection.length, y: average.y + value.y / collection.length, z: average.z + value.z / collection.length };
-}, { x: 0.0, y: 0.0, z: 0.0 });
-
-(0, _lodash2.default)(points).each(function (point) {
-  point.x -= center.x;
-  point.y -= center.y;
-  point.z -= center.z;
-});
-
-var scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
-var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-var geometry = new THREE.SphereGeometry(5, 32, 32);
-var cubes = [];
-var color = (0, _tinycolor2.default)("blue");
-
-for (var i = 0, len = points.length; i < len; i++) {
-  var cube = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: color.toHexString() }));
-
-  color = color.spin(1);
-  scene.add(cube);
-  cube.position.x = points[i].x * 10;
-  cube.position.y = points[i].y * 10;
-  cube.position.z = points[i].z * 10;
-  cube.scale.x = 0.015;
-  cube.scale.y = 0.015;
-  cube.scale.z = 0.015;
-  cubes.push(cube);
-}
-
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.minDistance = 10;
-controls.maxDistance = 50;
-
-camera.position.x = 6;
-camera.position.y = 6;
-camera.position.z = 6;
-camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-function render() {
-  requestAnimationFrame(render);
-  renderer.render(scene, camera);
-}
-
-render();
-
-/***/ }),
-
-/***/ 72:
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10856,7 +10720,149 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 })(Math);
 
-/***/ })
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/******/ });
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _lodash = __webpack_require__(1);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _tinycolor = __webpack_require__(2);
+
+var _tinycolor2 = _interopRequireDefault(_tinycolor);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var origin = points[0];
+
+(0, _lodash2.default)(points).each(function (point) {
+  point.x -= origin.x;
+  point.y -= origin.y;
+  point.z -= origin.z;
+});
+var points_center = center(points);
+points.push(points_center);
+
+var scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+scene.add(new THREE.AxisHelper(20));
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+var geometry = new THREE.SphereGeometry(5, 32, 32);
+var cubes = [];
+var color = (0, _tinycolor2.default)("blue");
+
+camera.position.x = 13.8;
+camera.position.y = 3.8;
+camera.position.z = 7.5;
+
+var color_increment = 360 / points.length;
+
+for (var i = 0, len = points.length; i < len; i++) {
+  var cube = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: color.toHexString() }));
+
+  color = color.spin(color_increment);
+  scene.add(cube);
+  cube.position.x = points[i].x * 10;
+  cube.position.y = points[i].y * 10;
+  cube.position.z = points[i].z * 10;
+  cube.scale.x = 0.015;
+  cube.scale.y = 0.015;
+  cube.scale.z = 0.015;
+  cubes.push(cube);
+}
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.minDistance = 1;
+controls.maxDistance = 100;
+
+function render() {
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+}
+function bounds(points) {
+  var x = _lodash2.default.map(points, "x");
+  var y = _lodash2.default.map(points, "y");
+  var z = _lodash2.default.map(points, "z");
+
+  return [new THREE.Vector3(_lodash2.default.min(x), _lodash2.default.min(y), _lodash2.default.min(z)), new THREE.Vector3(_lodash2.default.max(x), _lodash2.default.max(y), _lodash2.default.max(z))];
+}
+
+function center(points) {
+  var b = bounds(points);
+  return new THREE.Vector3((b[0].x + b[1].x) / 2, (b[0].y + b[1].y) / 2, (b[0].z + b[1].z) / 2);
+}
+
+render();
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=index.js.map

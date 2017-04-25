@@ -1,42 +1,48 @@
 import _ from "lodash";
 import tinycolor from "tinycolor2";
 
-// center that shit
-var center = _(points).reduce(function(average, value, index, collection) {
-  return { x: average.x + value.x / collection.length, y: average.y + value.y / collection.length, z: average.z + value.z / collection.length };
-}, { x: 0.0, y: 0.0, z: 0.0 });
+var origin = points[0];
 
 _(points).each(function(point) {
-  point.x -= center.x;
-  point.y -= center.y;
-  point.z -= center.z;
+  point.x -= origin.x;
+  point.y -= origin.y;
+  point.z -= origin.z;
 });
+var points_center = center(points);
+points.push(points_center);
 
 var scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xffffff );
+scene.background = new THREE.Color(0xffffff);
+scene.add(new THREE.AxisHelper(20));
 var camera = new THREE.PerspectiveCamera(
   50,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000,
+  1000
 );
 
 var renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+var geometry = new THREE.SphereGeometry(5, 32, 32);
 var cubes = [];
 var color = tinycolor("blue");
+
+camera.position.x = 13.8;
+camera.position.y = 3.8;
+camera.position.z = 7.5;
+
+var color_increment = 360 / points.length;
 
 for (var i = 0, len = points.length; i < len; i++) {
   var cube = new THREE.Mesh(
     geometry,
-    new THREE.MeshBasicMaterial( { color: color.toHexString() } )
+    new THREE.MeshBasicMaterial({ color: color.toHexString() })
   );
 
-  color = color.spin(1);
-  scene.add( cube );
+  color = color.spin(color_increment);
+  scene.add(cube);
   cube.position.x = points[i].x * 10;
   cube.position.y = points[i].y * 10;
   cube.position.z = points[i].z * 10;
@@ -47,17 +53,31 @@ for (var i = 0, len = points.length; i < len; i++) {
 }
 
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.minDistance = 10;
-controls.maxDistance = 50;
-
-camera.position.x = 6;
-camera.position.y = 6;
-camera.position.z = 6;
-camera.lookAt(new THREE.Vector3(0, 0, 0));
+controls.minDistance = 1;
+controls.maxDistance = 100;
 
 function render() {
-  requestAnimationFrame( render );
-  renderer.render( scene, camera );
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+}
+function bounds(points) {
+  var x = _.map(points, "x");
+  var y = _.map(points, "y");
+  var z = _.map(points, "z");
+
+  return [
+    new THREE.Vector3(_.min(x), _.min(y), _.min(z)),
+    new THREE.Vector3(_.max(x), _.max(y), _.max(z))
+  ];
+}
+
+function center(points) {
+  var b = bounds(points);
+  return new THREE.Vector3(
+    (b[0].x + b[1].x) / 2,
+    (b[0].y + b[1].y) / 2,
+    (b[0].z + b[1].z) / 2
+  );
 }
 
 render();
